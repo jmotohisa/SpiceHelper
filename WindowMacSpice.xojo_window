@@ -4121,13 +4121,13 @@ End
 		  Dim obj as AppleEventObjectSpecifier
 		  
 		  Dim posixName as String
-		  Dim hfsName as String
+		  // Dim hfsName as String
 		  
 		  posixName=f.NativePath
-		  hfsName=PosixToHFS(posixName)
+		  // hfsName=PosixToHFS(posixName)
 		  
 		  ae=New AppleEvent("misc","dosc","CDHW.MacSpice")
-		  ae.StringParam("----") ="do script "" source " + hfsName + """"
+		  ae.StringParam("----") ="do script "" source " + posixName + """"
 		  if(not ae.Send()) then
 		    MsgBox ("AppleEvent Failed")
 		  end if
@@ -4272,7 +4272,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function setSweepSub(index as integer, name as string,start as string, stop as string, inc as string) As string
+		Function setSweepSub(index as integer, name as string, start as string, stop as string, inc as string) As string
 		  Dim s As string
 		  
 		  select case index
@@ -4365,7 +4365,7 @@ End
 		    'SpiceDirective.text = ".SENS"
 		    profSuffix.text="SENS"
 		  case 8 // Pole Zero
-		     SyntaxLabel.Text = "Syntax: .PZ NODE1 NODE2 NODE3 NODE4 { CUR | VOL } { POL | ZER | PZ } [ VECTOR | SCALAR ]"
+		    SyntaxLabel.Text = "Syntax: .PZ NODE1 NODE2 NODE3 NODE4 { CUR | VOL } { POL | ZER | PZ } [ VECTOR | SCALAR ]"
 		    profSuffix.text="PZ"
 		  end select
 		  
@@ -4839,12 +4839,12 @@ End
 		  dim anArray(-1) as String
 		  dim arraySize as Integer
 		  dim posixPath as String
-		  dim HFSPath as String
+		  // dim HFSPath as String
 		  
 		  posixPath=fileNetList.NativePath
 		  //MsgBox posixPath
 		  // conversion
-		  hfsPath=ConvertPath.PosixToHFS(posixPath)
+		  //hfsPath=ConvertPath.PosixToHFS(posixPath)
 		  //MsgBox hfsPath
 		  
 		  //posixPath=ConvertPath.HFStoPosix(hfsPath)
@@ -4892,7 +4892,7 @@ End
 		      
 		      // netlist
 		      t.WriteLine("****** netlist **********")
-		      t.WriteLine(".include "+HFSPath)
+		      //t.WriteLine(".include "+HFSPath)
 		      t.WriteLine("")
 		      
 		      // Libraries and includes
@@ -4901,8 +4901,8 @@ End
 		      Dim anArray3(-1) as String
 		      anArray3=Split(App.includeFiles,App.delim)
 		      for i=0 to Ubound(anArray3)
-		        hfsPath=ConvertPath.PosixToHFS(anArray3(i))
-		        t.WriteLine(".include " + HFSPath)
+		        //hfsPath=ConvertPath.PosixToHFS(anArray3(i))
+		        t.WriteLine(".include " + anArray3(i))
 		      next
 		      
 		      ' t.WriteLine(header.text)
@@ -4969,7 +4969,7 @@ End
 		  posixPath=fileNetList.NativePath
 		  //MsgBox posixPath
 		  // conversion
-		  hfsPath=ConvertPath.PosixToHFS(posixPath)
+		  //hfsPath=ConvertPath.PosixToHFS(posixPath)
 		  //MsgBox hfsPath
 		  
 		  //posixPath=ConvertPath.HFStoPosix(hfsPath)
@@ -5017,7 +5017,7 @@ End
 		      
 		      // netlist
 		      t.WriteLine("****** netlist **********")
-		      t.WriteLine(".include "+HFSPath)
+		      // t.WriteLine(".include "+HFSPath)
 		      t.WriteLine("")
 		      
 		      // Libraries and includes
@@ -5026,8 +5026,8 @@ End
 		      Dim anArray3(-1) as String
 		      anArray3=Split(App.includeFiles,App.delim)
 		      for i=0 to Ubound(anArray3)
-		        hfsPath=ConvertPath.PosixToHFS(anArray3(i))
-		        t.WriteLine(".include " + HFSPath)
+		        //hfsPath=ConvertPath.PosixToHFS(anArray3(i))
+		        t.WriteLine(".include " + anArray3(i))
 		      next
 		      
 		      ' t.WriteLine(header.text)
